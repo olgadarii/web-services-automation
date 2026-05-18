@@ -18,12 +18,19 @@ pipeline {
                     string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN'),
                     usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_PASS')
                 ]) {
-                    sh """
-                        sed -i '' 's|token=.*|token=${GITHUB_TOKEN}|' src/main/resources/config.properties
-                        sed -i '' 's|username=.*|username=${GITHUB_USER}|' src/main/resources/config.properties
-                        sed -i '' 's|password=.*|password=${GITHUB_PASS}|' src/main/resources/config.properties
+                    sh '''
+                        python3 -c "
+import os
+lines = [
+    'base_url=https://api.github.com\\n',
+    'token=' + os.environ['GITHUB_TOKEN'] + '\\n',
+    'username=' + os.environ['GITHUB_USER'] + '\\n',
+    'password=' + os.environ['GITHUB_PASS'] + '\\n'
+]
+open('src/main/resources/config.properties', 'w').writelines(lines)
+"
                         mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
-                    """
+                    '''
                 }
             }
         }
