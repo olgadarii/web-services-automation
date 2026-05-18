@@ -24,12 +24,7 @@ pipeline {
                     string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN'),
                     usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_PASS')
                 ]) {
-                    sh '''
-                        sed -i "" "s|token=.*|token=${GITHUB_TOKEN}|" src/main/resources/config.properties
-                        sed -i "" "s|username=.*|username=${GITHUB_USER}|" src/main/resources/config.properties
-                        sed -i "" "s|password=.*|password=${GITHUB_PASS}|" src/main/resources/config.properties
-                        mvn test -Dsurefire.suiteXmlFiles=testng.xml
-                    '''
+                    sh 'mvn test -Dsurefire.suiteXmlFiles=testng.xml -Dgithub.token=$GITHUB_TOKEN -Dgithub.username=$GITHUB_USER -Dgithub.password=$GITHUB_PASS'
                 }
             }
         }

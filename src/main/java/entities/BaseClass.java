@@ -23,8 +23,8 @@ public class BaseClass {
     private static final Logger logger = LogManager.getLogger(BaseClass.class);
     private static final Properties config = loadConfig();
 
-    protected static final String BASE_ENDPOINT = config.getProperty("base_url", "https://api.github.com");
-    protected static final String TOKEN = config.getProperty("token", "");
+    protected static final String BASE_ENDPOINT = System.getProperty("github.baseUrl", config.getProperty("base_url", "https://api.github.com"));
+    protected static final String TOKEN = System.getProperty("github.token", config.getProperty("token", ""));
 
     protected CloseableHttpClient client;
     protected CloseableHttpResponse response;
@@ -42,7 +42,7 @@ public class BaseClass {
     }
 
     protected static String getConfigProperty(String key) {
-        return config.getProperty(key, "");
+        return System.getProperty("github." + key, config.getProperty(key, ""));
     }
 
     @BeforeTest
