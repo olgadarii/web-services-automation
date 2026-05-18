@@ -22,7 +22,7 @@ pipeline {
                         sed -i '' 's|token=.*|token=${GITHUB_TOKEN}|' src/main/resources/config.properties
                         sed -i '' 's|username=.*|username=${GITHUB_USER}|' src/main/resources/config.properties
                         sed -i '' 's|password=.*|password=${GITHUB_PASS}|' src/main/resources/config.properties
-                        mvn test -Dsurefire.suiteXmlFiles=testng.xml
+                        mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
                     """
                 }
             }
