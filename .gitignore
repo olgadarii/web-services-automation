@@ -1,0 +1,9 @@
+target/
+test-output/
+logs/
+.idea/
+*.iml
+.DS_Store
+com.github.entities/
+chromedriver
+grid/

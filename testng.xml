@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes" thread-count="5">
+
+
+    <test name="Service Tests">
+        <classes>
+            <class name="service.BodyTestWithSimpleMap"/>
+            <class name="service.Get200"/>
+            <class name="service.Get401"/>
+            <class name="service.Get404"/>
+            <class name="service.DeleteAndPost"/>
+        </classes>
+    </test>
+</suite>
+
+
+        <!--    <test name="Ui Tests">-->
+        <!--        <classes>-->
+        <!--            <class name="ui.TestLoginPage"/>-->
+        <!--            <class name="ui.TestSeleniumWaits"/>-->
+        <!--        </classes>-->
+        <!--    </test>-->

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false"
+                pattern="%d{HH:mm:ss.SSS} [%t] %highlight{%-5level}{FATAL=red blink, ERROR=red bold, WARN=yellow bold, INFO=green, DEBUG=cyan, TRACE=white} %style{%logger{36}}{blue} - %msg%n%throwable"/>
+        </Console>
+        <File name="FileAppender" fileName="logs/test-run.log" append="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n%throwable"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
