@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class BaseClass {
+public class BaseClass implements ApiClient {
 
     private static final Logger logger = LogManager.getLogger(BaseClass.class);
     private static final Properties config = loadConfig();
@@ -72,36 +72,36 @@ public class BaseClass {
         logger.info("HTTP client and response closed");
     }
 
-    protected HttpGet createGetRequest(String url) {
+    public HttpGet createGetRequest(String url) {
         logger.info("Creating GET request to: " + url);
         return new HttpGet(url);
     }
 
-    protected HttpPost createPostRequest(String url, String jsonBody) {
+    public HttpPost createPostRequest(String url, String jsonBody) {
         logger.info("Creating POST request to: " + url);
         HttpPost request = new HttpPost(url);
         request.setEntity(new StringEntity(jsonBody, ContentType.APPLICATION_JSON));
         return request;
     }
 
-    protected HttpDelete createDeleteRequest(String url) {
+    public HttpDelete createDeleteRequest(String url) {
         logger.info("Creating DELETE request to: " + url);
         return new HttpDelete(url);
     }
 
-    protected HttpOptions createOptionsRequest(String url) {
+    public HttpOptions createOptionsRequest(String url) {
         logger.info("Creating OPTIONS request to: " + url);
         return new HttpOptions(url);
     }
 
-    protected HttpPut createPutRequest(String url, String jsonBody) {
+    public HttpPut createPutRequest(String url, String jsonBody) {
         logger.info("Creating PUT request to: " + url);
         HttpPut request = new HttpPut(url);
         request.setEntity(new StringEntity(jsonBody, ContentType.APPLICATION_JSON));
         return request;
     }
 
-    protected void addTokenAuth(HttpRequestBase request) {
+    public void addTokenAuth(HttpRequestBase request) {
         request.setHeader(HttpHeaders.AUTHORIZATION, "token " + TOKEN);
     }
 
